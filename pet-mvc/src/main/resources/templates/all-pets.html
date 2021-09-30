@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>All Pets</title>
+    </head>
+    <body>
+        <h1>All Of Our Pets</h1>
+        <ul>
+            <!-- th:each performs a loop using thymeleaf -->
+            <!-- th:text writes innerHTML to the element -->
+            <li th:each="pet : ${pets}"
+                th:text="${pet.name}"></li>
+        </ul>
+    </body>
+</html>
+
