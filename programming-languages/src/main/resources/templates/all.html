@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>All Ranked Programming Languages</title>
+    </head>
+    <body>
+        <h1>All Ranked Programming Languages</h1>
+        <ul>
+            <li th:each="lang : ${langs}"
+                th:text="'#' + ${lang.ranking} + ': ' + ${lang.name}"></li>
+        </ul>
+    </body>
+</html>

@@ -2,10 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
-        <title>Random Programming Language</title>
+        <title th:text="${title}"></title>
     </head>
     <body>
-        <h1>A random programming language</h1>
+        <h1 th:text="${header}"></h1>
         <ul>
             <li>Name: <span th:text="${lang.name}"></span></li>
         </ul>

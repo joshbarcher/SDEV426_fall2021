@@ -12,14 +12,21 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @Builder
 @Entity //this marks the class as a Hibernate Entity (a table will be created to store Language objects)
-public class Language
+public class Language implements Comparable<Language>
 {
     //surrogate key
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id //this is a primary key
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //this is auto-increment
     private int languageId;
 
     private String name;
     private int ranking;
     private boolean looselyTyped;
+
+    @Override
+    public int compareTo(Language other)
+    {
+        //order languages by rank
+        return this.ranking - other.ranking;
+    }
 }

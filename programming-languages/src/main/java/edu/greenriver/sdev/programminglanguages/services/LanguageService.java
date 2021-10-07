@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 public class LanguageService
@@ -35,7 +36,13 @@ public class LanguageService
 
     public List<Language> topThree()
     {
-        return null;
+        List<Language> all = repo.findAll();
+        List<Language> top3 = all.stream()
+            .sorted()
+            .limit(3)
+            .collect(Collectors.toList());
+
+        return top3;
     }
 
     public Language favorite()
