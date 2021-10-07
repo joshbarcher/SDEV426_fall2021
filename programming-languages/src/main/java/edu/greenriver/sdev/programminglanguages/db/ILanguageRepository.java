@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ILanguageRepository extends JpaRepository<Language, Integer>
 {
-    //nothing here...
+    Language findByRankingIs(int rank);
 }

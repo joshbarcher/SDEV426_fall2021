@@ -52,6 +52,6 @@ public class LanguageService
 
     public Language languageByRank(int rank)
     {
-        return null;
+        return repo.findByRankingIs(rank);
     }
 }
