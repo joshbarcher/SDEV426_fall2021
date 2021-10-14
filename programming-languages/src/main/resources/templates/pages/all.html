@@ -1,0 +1,61 @@
+<!--
+    A page to view all ranked languages.
+
+    Author: Josh Archer
+    File: all.html
+    Date: 10/12/2021
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/parts :: meta('All Ranked Programming Languages')"></head>
+    <body>
+        <header th:replace="fragments/parts :: top"></header>
+
+        <h1>All Ranked Programming Languages</h1>
+        <ul>
+            <li th:each="lang : ${langs}"
+                th:text="'#' + ${lang.ranking} + ': ' + ${lang.name}"></li>
+        </ul>
+
+        <h1>All Language Data</h1>
+        <p th:if="${langs.size() == 0}">No languages available!</p>
+        <table th:if="${langs.size() != 0}">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Ranking</th>
+                    <th>Loosely typed?</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="lang : ${langs}">
+                    <td th:text="${lang.languageId}"></td>
+                    <td th:text="${lang.name}"></td>
+                    <td th:text="${lang.ranking}"></td>
+                    <td th:text="${lang.looselyTyped}"></td>
+                </tr>
+                <tr th:remove="all">
+                    <td>0</td>
+                    <td>C++</td>
+                    <td>10</td>
+                    <td>false</td>
+                </tr>
+                <tr th:remove="all">
+                    <td>0</td>
+                    <td>C++</td>
+                    <td>10</td>
+                    <td>false</td>
+                </tr>
+                <tr th:remove="all">
+                    <td>0</td>
+                    <td>C++</td>
+                    <td>10</td>
+                    <td>false</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <footer th:replace="fragments/parts :: bottom"></footer>
+    </body>
+</html>

@@ -45,6 +45,11 @@ public class LanguageService
         return top3;
     }
 
+    public Language languageById(int id)
+    {
+        return repo.findById(id).orElse(null);
+    }
+
     public Language favorite()
     {
         return null;

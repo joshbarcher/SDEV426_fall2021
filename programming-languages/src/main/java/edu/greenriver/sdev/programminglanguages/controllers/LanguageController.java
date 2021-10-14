@@ -7,12 +7,25 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
+
+/**
+    The primary controller of the web site.
+
+    @author Josh Archer
+    @version 1.0
+*/
 @Controller
 public class LanguageController
 {
     //access the service layer using dependency injection
     private LanguageService service;
 
+    /**
+     * Creates a new controller with the service
+     * injected into the controller.
+     * @param service the language service
+     */
     public LanguageController(LanguageService service)
     {
         this.service = service;
@@ -28,7 +41,7 @@ public class LanguageController
         model.addAttribute("title", "A Random Language");
         model.addAttribute("header", "View a Random Language");
 
-        return "single";
+        return "pages/single";
     }
 
     /*
@@ -45,21 +58,41 @@ public class LanguageController
         model.addAttribute("title", "A Language By Rank");
         model.addAttribute("header", "View a Language");
 
-        return "single";
+        return "pages/single";
     }
 
     @RequestMapping("languages/all")
     public String all(Model model)
     {
         //store all languages to the model
-        model.addAttribute("langs", service.allLanguages());
-        return "all";
+        model.addAttribute("langs", new ArrayList<>());
+        return "pages/all";
     }
 
     @RequestMapping("languages/top3")
     public String top(Model model)
     {
         model.addAttribute("langs", service.topThree());
-        return "all";
+        return "pages/all";
+    }
+
+    @RequestMapping("languages/id/{id}")
+    public String byId(Model model, @PathVariable int id)
+    {
+        model.addAttribute("lang", service.languageById(id));
+        model.addAttribute("title", "A Language By Id");
+        model.addAttribute("header", "View a Language");
+        return "pages/single";
+    }
+
+    @RequestMapping("languages/anotherrandom")
+    public String anotherRandom(Model model)
+    {
+        Language randLang = service.random();
+        model.addAttribute("lang", randLang);
+        model.addAttribute("title", "A Random Language");
+        model.addAttribute("header", "View a Random Language");
+
+        return "pages/single";
     }
 }

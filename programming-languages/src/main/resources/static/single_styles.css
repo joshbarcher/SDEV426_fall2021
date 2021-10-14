@@ -1,0 +1,17 @@
+/*
+    The styles for all pages on the site.
+
+    Author: Josh Archer
+    File: single_styles.css
+    Date: 10/12/2021
+*/
+
+html {
+    background-color: beige;
+}
+
+body {
+    color: brown;
+    width: 900px;
+}
+
