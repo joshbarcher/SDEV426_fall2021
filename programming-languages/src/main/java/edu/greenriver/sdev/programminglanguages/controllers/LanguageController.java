@@ -4,8 +4,7 @@ import edu.greenriver.sdev.programminglanguages.model.Language;
 import edu.greenriver.sdev.programminglanguages.services.LanguageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -16,6 +15,7 @@ import java.util.ArrayList;
     @version 1.0
 */
 @Controller
+@RequestMapping("languages")
 public class LanguageController
 {
     //access the service layer using dependency injection
@@ -33,7 +33,7 @@ public class LanguageController
 
     //we can save view-template variables to the Model object
     //so we can use them in our pages
-    @RequestMapping("languages/random")
+    @RequestMapping("random")
     public String random(Model model)
     {
         Language randLang = service.random();
@@ -51,7 +51,7 @@ public class LanguageController
         localhost:9000/languages/rank/3
         localhost:9000/languages/rank/asdf
      */
-    @RequestMapping("languages/rank/{rank}")
+    @RequestMapping("rank/{rank}")
     public String byRank(Model model, @PathVariable int rank)
     {
         model.addAttribute("lang", service.languageByRank(rank));
@@ -61,22 +61,22 @@ public class LanguageController
         return "pages/single";
     }
 
-    @RequestMapping("languages/all")
+    @RequestMapping("all")
     public String all(Model model)
     {
         //store all languages to the model
-        model.addAttribute("langs", new ArrayList<>());
+        model.addAttribute("langs", service.allLanguages());
         return "pages/all";
     }
 
-    @RequestMapping("languages/top3")
+    @RequestMapping("top3")
     public String top(Model model)
     {
         model.addAttribute("langs", service.topThree());
         return "pages/all";
     }
 
-    @RequestMapping("languages/id/{id}")
+    @RequestMapping("id/{id}")
     public String byId(Model model, @PathVariable int id)
     {
         model.addAttribute("lang", service.languageById(id));
@@ -85,7 +85,7 @@ public class LanguageController
         return "pages/single";
     }
 
-    @RequestMapping("languages/anotherrandom")
+    @RequestMapping("anotherrandom")
     public String anotherRandom(Model model)
     {
         Language randLang = service.random();
@@ -95,4 +95,39 @@ public class LanguageController
 
         return "pages/single";
     }
+
+    @GetMapping("add/form")
+    public String loadForm(Model model)
+    {
+        //pass an empty object to a form
+        Language lang = new Language(0, "Ruby", 0, false);
+        model.addAttribute("lang", lang);
+        return "pages/add-language";
+    }
+
+    @PostMapping("add/form")
+    public String handleForm(@ModelAttribute Language lang)
+    {
+        System.out.println("Posted from form: " + lang);
+        service.saveLanguage(lang);
+        return "redirect:/languages/all";
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

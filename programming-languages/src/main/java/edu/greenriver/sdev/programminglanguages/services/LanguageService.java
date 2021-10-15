@@ -59,4 +59,23 @@ public class LanguageService
     {
         return repo.findByRankingIs(rank);
     }
+
+    public void saveLanguage(Language lang)
+    {
+        //validate that the language object has valid data
+
+        repo.save(lang);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+

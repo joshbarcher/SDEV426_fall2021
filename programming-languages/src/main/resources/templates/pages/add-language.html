@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Add a New Language</title>
+    </head>
+    <body>
+        <form th:action="@{/languages/add/form}" th:object="${lang}"
+            method="post">
+            <div>
+                <label>Name</label>
+                <input type="text" name="name" th:field="*{name}">
+            </div>
+            <div>
+                <label>Ranking</label>
+                <input type="number" min="1" max="100"
+                       name="ranking" th:field="*{ranking}">
+            </div>
+            <div>
+                <label>Loosely Typed</label>
+                <input type="text" name="loosely-typed"
+                       th:field="*{looselyTyped}">
+            </div>
+            <button type="submit">Add New Language</button>
+        </form>
+    </body>
+</html>
