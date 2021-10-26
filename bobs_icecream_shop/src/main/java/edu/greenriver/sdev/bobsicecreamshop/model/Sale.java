@@ -1,9 +1,6 @@
 package edu.greenriver.sdev.bobsicecreamshop.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,11 +16,16 @@ public class Sale implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int saleId;
 
     private double newPrice;
     private LocalDate startingDate;
     private int daysOfSale;
+
+    @ToString.Exclude
+    @OneToOne
+    @JoinColumn(name="productId")
+    private Product product;
 }
 
 

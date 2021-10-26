@@ -45,8 +45,19 @@ public class BobsIcecreamShopApplication
             .build();
 
         //save them
-        productRepo.save(neopolitan);
         productRepo.save(pralines);
         saleRepo.save(iceCreamSale);
+        productRepo.save(neopolitan);
+
+        //connect both sides of the relationship
+        neopolitan.setSale(iceCreamSale);
+        iceCreamSale.setProduct(neopolitan);
+
+        //save the product and sale after connecting them
+        productRepo.save(neopolitan);
+        saleRepo.save(iceCreamSale);
+
+        Product fromDb = productRepo.findById(2).orElse(null);
+        System.out.println(fromDb);
     }
 }
