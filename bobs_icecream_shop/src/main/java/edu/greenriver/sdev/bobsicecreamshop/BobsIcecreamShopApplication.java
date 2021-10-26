@@ -1,8 +1,14 @@
 package edu.greenriver.sdev.bobsicecreamshop;
 
+import edu.greenriver.sdev.bobsicecreamshop.database.IProductRepo;
+import edu.greenriver.sdev.bobsicecreamshop.database.ISaleRepo;
 import edu.greenriver.sdev.bobsicecreamshop.model.Product;
+import edu.greenriver.sdev.bobsicecreamshop.model.Sale;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+
+import java.time.LocalDate;
 
 @SpringBootApplication
 public class BobsIcecreamShopApplication
@@ -10,11 +16,37 @@ public class BobsIcecreamShopApplication
 
     public static void main(String[] args)
     {
-        SpringApplication.run(BobsIcecreamShopApplication.class, args);
+        //access the context and data layer
+        ApplicationContext ctx = SpringApplication.run(BobsIcecreamShopApplication.class, args);
+        IProductRepo productRepo = ctx.getBean(IProductRepo.class);
+        ISaleRepo saleRepo = ctx.getBean(ISaleRepo.class);
 
-        Product product = new Product();
+        //create a few entities
+        Product neopolitan = Product.builder()
+            .name("neopolitan")
+            .price(4.99)
+            .category("ice cream")
+            .expires(LocalDate.now())
+            .details("Yummy!")
+            .build();
 
-        //then use the product as if it's an entity
+        Product pralines = Product.builder()
+            .name("pralines and cream")
+            .price(6.99)
+            .category("ice cream")
+            .expires(LocalDate.now())
+            .details("Also, Yummy!")
+            .build();
+
+        Sale iceCreamSale = Sale.builder()
+            .newPrice(3.99)
+            .startingDate(LocalDate.now())
+            .daysOfSale(2)
+            .build();
+
+        //save them
+        productRepo.save(neopolitan);
+        productRepo.save(pralines);
+        saleRepo.save(iceCreamSale);
     }
-
 }
