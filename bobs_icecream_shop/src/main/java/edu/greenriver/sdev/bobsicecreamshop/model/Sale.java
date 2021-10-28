@@ -23,7 +23,7 @@ public class Sale implements Serializable
     private int daysOfSale;
 
     @ToString.Exclude
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="productId")
     private Product product;
 }

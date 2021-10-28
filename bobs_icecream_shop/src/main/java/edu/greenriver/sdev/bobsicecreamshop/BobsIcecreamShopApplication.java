@@ -9,6 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 @SpringBootApplication
 public class BobsIcecreamShopApplication
@@ -44,20 +47,50 @@ public class BobsIcecreamShopApplication
             .daysOfSale(2)
             .build();
 
+        Sale halloweenSale = Sale.builder()
+                .newPrice(4.49)
+                .startingDate(LocalDate.now())
+                .daysOfSale(1)
+                .build();
+
+        Sale christmasSale = Sale.builder()
+                .newPrice(2.99)
+                .startingDate(LocalDate.now())
+                .daysOfSale(5)
+                .build();
+
         //save them
         productRepo.save(pralines);
-        saleRepo.save(iceCreamSale);
         productRepo.save(neopolitan);
+        saleRepo.save(iceCreamSale);
 
         //connect both sides of the relationship
-        neopolitan.setSale(iceCreamSale);
+        neopolitan.setSale(new ArrayList<>());
+        List<Sale> sales = neopolitan.getSale();
+        sales.add(iceCreamSale);
+        sales.add(halloweenSale);
+        sales.add(christmasSale);
         iceCreamSale.setProduct(neopolitan);
+        halloweenSale.setProduct(neopolitan);
+        christmasSale.setProduct(neopolitan);
 
         //save the product and sale after connecting them
         productRepo.save(neopolitan);
         saleRepo.save(iceCreamSale);
+        saleRepo.save(halloweenSale);
+        saleRepo.save(christmasSale);
 
         Product fromDb = productRepo.findById(2).orElse(null);
-        System.out.println(fromDb);
+        for (Sale sale : fromDb.getSale())
+        {
+            System.out.println(sale);
+        }
+
+        Iterator<Sale> it = fromDb.getSale().iterator();
+        while (it.hasNext())
+        {
+            Sale sale = it.next();
+            System.out.println(sale);
+        }
     }
 }

@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -29,8 +30,8 @@ public class Product
 
     //one-to-one
     @ToString.Exclude
-    @OneToOne(mappedBy = "product", fetch = FetchType.EAGER)
-    private Sale sale;
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+    private List<Sale> sale;
 }
 
 
