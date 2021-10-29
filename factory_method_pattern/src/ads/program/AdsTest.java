@@ -1,17 +1,17 @@
 package ads.program;
 
-import ads.entities.Advertisement;
-import ads.generation.AdGenerator;
+import ads.generation.LasVegasAdGenerator;
 
 public class AdsTest
 {
     public static void main(String[] args)
     {
-        AdGenerator adgenerator = new CaliforniaAds();
-        
-        for (Advertisement ad : adgenerator.getAllAds())
+        LasVegasAdGenerator ads = new LasVegasAdGenerator();
+
+        //show 10 ads
+        for (int i = 1; i <= 10; i++)
         {
-            System.out.println(ad);
+            System.out.println(ads.showAd());
         }
     }
 }

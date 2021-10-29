@@ -1,7 +1,6 @@
 package ads.generation;
 
 import ads.entities.Advertisement;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -32,6 +31,8 @@ public abstract class AdGenerator
         //get our regional ads if not loaded
         if (ads == null)
         {
+            //this class requires an object to do it's work, and that
+            //object is provided by a child class...
             ads = getGenerator().getAppropriateAds();
         }
         

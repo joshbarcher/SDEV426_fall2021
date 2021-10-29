@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IRegionalGenerator
 {
-    public List<Advertisement> getAppropriateAds();
+    List<Advertisement> getAppropriateAds();
 }
 
 
