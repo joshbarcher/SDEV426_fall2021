@@ -24,27 +24,27 @@ public class ProductApiController
     }
 
     @GetMapping("{id}") //http://localhost:8080/products/{id}
-    public Product productById(int id)
+    public Product productById(@PathVariable int id)
     {
-        return null;
+        return service.productById(id);
     }
 
     @PostMapping
-    public Product addProduct(Product product)
+    public Product addProduct(@RequestBody Product product)
     {
-        return null;
+        return service.saveProduct(product);
     }
 
     @PutMapping
     public Product editProduct(Product product)
     {
-        return null;
+        return service.editProduct(product);
     }
 
     @DeleteMapping("{id}")
     public void deleteProduct(int id)
     {
-
+        service.deleteProduct(id);
     }
 }
 
