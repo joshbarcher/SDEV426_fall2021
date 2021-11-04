@@ -1,5 +1,6 @@
 package edu.greenriver.sdev.bobsicecreamshop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,6 +26,7 @@ public class Sale implements Serializable
     @ToString.Exclude
     @ManyToOne
     @JoinColumn(name="productId")
+    @JsonIgnore
     private Product product;
 }
 

@@ -1,5 +1,6 @@
 package edu.greenriver.sdev.bobsicecreamshop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,6 +32,7 @@ public class Product
     //one-to-one
     @ToString.Exclude
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Sale> sale;
 }
 
