@@ -36,21 +36,26 @@ public class ProductApiController
     }
 
     @PostMapping
-    public Product addProduct(@RequestBody Product product)
+    public ResponseEntity<Product> addProduct(@RequestBody Product product)
     {
-        return service.saveProduct(product);
+        return new ResponseEntity<>(service.saveProduct(product), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public Product editProduct(@RequestBody Product product)
+    public ResponseEntity<Product> editProduct(@RequestBody Product product)
     {
-        return service.editProduct(product);
+        if (!service.productExists(product.getProductId()))
+        {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(service.editProduct(product), HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("{id}")
-    public void deleteProduct(@PathVariable int id)
+    public ResponseEntity deleteProduct(@PathVariable int id)
     {
         service.deleteProduct(id);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }
 

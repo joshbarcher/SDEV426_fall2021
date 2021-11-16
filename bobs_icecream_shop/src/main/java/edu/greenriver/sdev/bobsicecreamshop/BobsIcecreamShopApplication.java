@@ -41,6 +41,22 @@ public class BobsIcecreamShopApplication
             .details("Also, Yummy!")
             .build();
 
+        Product bananaSplit = Product.builder()
+                .name("banana split")
+                .price(12.99)
+                .category("ice cream")
+                .expires(LocalDate.now())
+                .details("Contains bananas")
+                .build();
+
+        Product doubleScoop = Product.builder()
+                .name("double scoop of icecream")
+                .price(4.49)
+                .category("ice cream")
+                .expires(LocalDate.now())
+                .details("Careful carrying this around!")
+                .build();
+
         Sale iceCreamSale = Sale.builder()
             .newPrice(3.99)
             .startingDate(LocalDate.now())
@@ -62,6 +78,8 @@ public class BobsIcecreamShopApplication
         //save them
         productRepo.save(pralines);
         productRepo.save(neopolitan);
+        productRepo.save(bananaSplit);
+        productRepo.save(doubleScoop);
         saleRepo.save(iceCreamSale);
 
         //connect both sides of the relationship
