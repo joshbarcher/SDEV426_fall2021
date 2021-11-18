@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("products") //http://localhost:8080/products is our endpoint
+@CrossOrigin(origins="*")
 public class ProductApiController
 {
     private ProductService service;
