@@ -100,8 +100,7 @@ public class LanguageController
     public String loadForm(Model model)
     {
         //pass an empty object to a form
-        Language lang = new Language(0, "Ruby", 0, false);
-        model.addAttribute("lang", lang);
+        model.addAttribute("lang", new Language());
         return "pages/add-language";
     }
 
