@@ -1,6 +1,7 @@
 package edu.greenriver.sdev.programminglanguages.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,6 +16,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 public class User implements UserDetails
 {

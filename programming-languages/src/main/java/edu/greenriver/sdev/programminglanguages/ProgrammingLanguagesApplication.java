@@ -1,10 +1,13 @@
 package edu.greenriver.sdev.programminglanguages;
 
 import edu.greenriver.sdev.programminglanguages.db.ILanguageRepository;
+import edu.greenriver.sdev.programminglanguages.db.IUserRepository;
 import edu.greenriver.sdev.programminglanguages.model.Language;
+import edu.greenriver.sdev.programminglanguages.model.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 public class ProgrammingLanguagesApplication
@@ -20,7 +23,16 @@ public class ProgrammingLanguagesApplication
 
     private static void loadAdminAccount(ApplicationContext context)
     {
+        //get the beans we need
+        IUserRepository repo = context.getBean(IUserRepository.class);
+        BCryptPasswordEncoder encoder = context.getBean(BCryptPasswordEncoder.class);
 
+        User admin = User.builder()
+            .username("admin")
+            .password(encoder.encode("pass"))
+            .build();
+
+        repo.save(admin);
     }
 
     private static void loadLanguages(ApplicationContext context)
