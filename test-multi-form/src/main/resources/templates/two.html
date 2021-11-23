@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+    <form action="/step3" method="post" th:object="${data}">
+        <input type="hidden" th:field="*{name}">
+
+        <label>Age</label>
+        <input type="number" th:field="*{age}">
+
+        <button>Advance</button>
+    </form>
+    </body>
+</html>

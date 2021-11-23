@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+    <form action="/save" method="post" th:object="${data}">
+        <input type="hidden" th:field="*{name}">
+        <input type="hidden" th:field="*{age}">
+
+        <label>Bio</label>
+        <textarea th:field="*{bio}"></textarea>
+
+        <button>Advance</button>
+    </form>
+    </body>
+</html>
