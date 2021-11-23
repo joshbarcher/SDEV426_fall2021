@@ -14,6 +14,17 @@ public class ProgrammingLanguagesApplication
         //get my spring container
         ApplicationContext context = SpringApplication.run(ProgrammingLanguagesApplication.class, args);
 
+        loadLanguages(context);
+        loadAdminAccount(context);
+    }
+
+    private static void loadAdminAccount(ApplicationContext context)
+    {
+
+    }
+
+    private static void loadLanguages(ApplicationContext context)
+    {
         //ask the spring container for a spring bean (our data layer)
         ILanguageRepository repo = context.getBean(ILanguageRepository.class);
 
