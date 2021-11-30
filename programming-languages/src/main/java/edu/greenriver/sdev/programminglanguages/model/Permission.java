@@ -19,6 +19,10 @@ public class Permission implements GrantedAuthority
 
     private String role;
 
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User user;
+
     @Override
     public String getAuthority()
     {

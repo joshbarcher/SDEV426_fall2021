@@ -78,6 +78,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
-        super.configure(http);
+        http
+            .authorizeRequests()
+                .antMatchers("/languages/random")
+                    .hasAnyAuthority("admin")
+                .antMatchers("/languages/top3")
+                    .hasAnyAuthority("user")
+                .antMatchers("/**")
+                    .permitAll()
+            .and()
+            .formLogin()
+                .failureForwardUrl("/login");
     }
 }

@@ -3,11 +3,14 @@ package edu.greenriver.sdev.programminglanguages;
 import edu.greenriver.sdev.programminglanguages.db.ILanguageRepository;
 import edu.greenriver.sdev.programminglanguages.db.IUserRepository;
 import edu.greenriver.sdev.programminglanguages.model.Language;
+import edu.greenriver.sdev.programminglanguages.model.Permission;
 import edu.greenriver.sdev.programminglanguages.model.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.ArrayList;
 
 @SpringBootApplication
 public class ProgrammingLanguagesApplication
@@ -27,12 +30,31 @@ public class ProgrammingLanguagesApplication
         IUserRepository repo = context.getBean(IUserRepository.class);
         BCryptPasswordEncoder encoder = context.getBean(BCryptPasswordEncoder.class);
 
+        //test admin account
         User admin = User.builder()
             .username("admin")
             .password(encoder.encode("pass"))
             .build();
 
+        Permission adminRole = new Permission(0, "admin", admin);
+        Permission userRole = new Permission(0, "user", admin);
+        admin.setPermissions(new ArrayList<>());
+        admin.getPermissions().add(adminRole);
+        admin.getPermissions().add(userRole);
+
         repo.save(admin);
+
+        //test user account
+        User regular = User.builder()
+            .username("user")
+            .password(encoder.encode("pass"))
+            .build();
+
+        userRole = new Permission(0, "user", regular);
+        regular.setPermissions(new ArrayList<>());
+        regular.getPermissions().add(userRole);
+
+        repo.save(regular);
     }
 
     private static void loadLanguages(ApplicationContext context)

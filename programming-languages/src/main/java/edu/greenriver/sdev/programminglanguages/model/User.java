@@ -27,6 +27,11 @@ public class User implements UserDetails
     private String username;
     private String password;
 
+    @OneToMany(fetch = FetchType.EAGER,
+               cascade = CascadeType.ALL,
+               mappedBy = "user")
+    private List<Permission> permissions;
+
     @Override
     public String getUsername()
     {
@@ -42,7 +47,7 @@ public class User implements UserDetails
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities()
     {
-        return new ArrayList<>();
+        return permissions;
     }
 
     @Override
